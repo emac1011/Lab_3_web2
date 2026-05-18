@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>JustDoIt! - Reporte de tareas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Left column -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <a th:href="@{/}">
+        <img th:src="@{/images/JustDoIt.png}"
+             alt="JustDoIt Logo"
+             width="200"
+             height="200">
+      </a>
+    </div>
+
+    <nav class="navigation">
+      <h3>Tareas</h3>
+
+      <ul>
+        <li>
+          <a th:href="@{/user/tasks}">
+            Tareas de usuario actual
+          </a>
+        </li>
+
+        <li>
+          <a th:href="@{/user/tasks/report}">
+            Reporte de tareas
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </aside>
+
+  <!-- Right column -->
+  <main class="content">
+
+    <h1>Reporte de tareas del usuario</h1>
+
+    <!-- User info fragment -->
+    <div th:replace="fragments/user-info :: userInfo(${user})"></div>
+
+    <br>
+
+    <!-- Tabla -->
+    <table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+      <thead>
+      <tr>
+        <th>Tarea</th>
+        <th>Estado</th>
+        <th>Fecha Límite</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="task : ${tasks}">
+
+        <td th:text="${task.description}">
+          Nombre tarea
+        </td>
+
+        <td th:text="${task.status}">
+          Estado
+        </td>
+
+        <td th:text="${task.deadline != null ? task.deadline : 'No especificada'}">
+          Fecha
+        </td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </main>
+
+</div>
+
+</body>
+</html>
